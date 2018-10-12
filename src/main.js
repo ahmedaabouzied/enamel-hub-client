@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
 import store from './store'
+import firebase from 'firebase';
 import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuetify, { theme: {
@@ -27,4 +28,12 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
-
+var config = {
+  apiKey: "AIzaSyDyJk3g5pc48JdPnJogvkNJ8YJbwdNO3xE",
+  authDomain: "enamel-hub.firebaseapp.com",
+  databaseURL: "https://enamel-hub.firebaseio.com",
+  projectId: "enamel-hub",
+  storageBucket: "enamel-hub.appspot.com",
+  messagingSenderId: "465845246424"
+};
+var firebaseApp = firebase.initializeApp(config);

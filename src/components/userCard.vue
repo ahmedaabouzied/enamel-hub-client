@@ -14,13 +14,27 @@
                             <h1>{{profile.first_name}} {{profile.last_name}}</h1>
                         </v-flex>
                     </v-layout>
-                    <v-layout row>
+                    <v-layout row style="margin-bottom:2%">
                         <v-flex xs12>
                             <h4><v-icon>location_on</v-icon> Alexandria , Egypt</h4>
                             <h4><v-icon>school</v-icon> Alexandria University</h4>
                             <p>I love cheese</p>
                             <h4><b>80</b> Followers</h4> 
                             <h4><b>80</b> Followings</h4>
+                        </v-flex>
+                    </v-layout>
+                    <v-divider></v-divider>
+                    <v-layout row class="profile_buttons">
+                        <v-flex class="text-xs-center mt-3" xs12>
+                            <v-btn small v-if="isMine" icon flat color="primary">
+                                <v-icon >edit</v-icon>
+                            </v-btn>
+                            <v-btn small icon flat color="primary">
+                                <v-icon>share</v-icon>
+                            </v-btn>
+                            <v-btn small icon flat color="primary">
+                                <v-icon>email</v-icon>
+                            </v-btn>
                         </v-flex>
                     </v-layout>
                 </v-card>
@@ -31,7 +45,7 @@
 
 <script>
 export default {
-    props:['user','profile']
+    props:['user','profile','isMine']
 }
 </script>
 
@@ -40,6 +54,7 @@ export default {
         font-family: 'Montserrat', sans-serif;
         font-weight: 300;
         padding:1.2%;
+        text-transform: capitalize;
         b{
             font-weight: 800;
         }
@@ -54,13 +69,15 @@ export default {
         object-fit: cover;
         position: relative;
     }
+    .profile_buttons{
+        margin-top: 0px;
+    }
     .profile_image{
         border: 3px white solid;
         border-radius: 60px;
         margin-top:-150px;
         position: relative;
         object-fit: cover;
-        z-index: 1;
         background-color: #f2f2f2;
     }
 </style>

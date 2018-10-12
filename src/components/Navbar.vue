@@ -4,7 +4,7 @@
         <v-tab><router-link to="/"><img src="@/assets/logo.svg" alt="logo" width="30px" height="30px"></router-link></v-tab>
         <v-tab><router-link to="/search"><v-icon>search</v-icon></router-link></v-tab>
         <v-tab><router-link to="/notifications"><v-icon>notifications</v-icon></router-link></v-tab>
-        <v-tab class="hidden-md-and-up"><router-link to="/profile"><v-icon>menu</v-icon></router-link></v-tab>
+        <v-tab class="hidden-md-and-up"><router-link :to="/profile/+user.id"><v-icon>menu</v-icon></router-link></v-tab>
     </v-tabs>
     <v-tabs fixed-tabs class="fixed-down hidden-sm-and-down" dark color="primary">
         <v-btn flat dark icon> <router-link to="/"><img src="@/assets/logo_nav.svg" alt="logo" width="30px" height="30px"></router-link></v-btn>
@@ -14,7 +14,7 @@
         <v-btn flat dark icon class="hidden-md-and-up"><v-icon>menu</v-icon></v-btn>
         <v-spacer class="hidden-sm-and-down"></v-spacer>
         <v-btn flat dark class="hidden-sm-and-down"><router-link to="/newcase"><h3 style="color:white;">NEW CASE</h3></router-link></v-btn>
-        <v-btn flat dark class="hidden-sm-and-down"><router-link to="/profile"><h3 style="color:white;">{{user.first_name}} {{user.last_name}}</h3></router-link></v-btn>
+        <v-btn flat dark class="hidden-sm-and-down"><router-link :to="/profile/+user.id"><h3 style="color:white;">{{user.first_name}} {{user.last_name}}</h3></router-link></v-btn>
         <v-menu offset-y>
         <v-btn flat dark icon slot="activator" ><v-icon>more_horiz</v-icon></v-btn>
         <v-list>

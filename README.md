@@ -19,3 +19,16 @@ npm run build --report
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+//=> task list :
+build the new case , // done //
+case star,  // done //
+unstar case,  // done //
+list all cases of user , // done//
+edit profile ,
+edit case, 
+delete case , 
+follow user , 
+unfollow user , 
+feed , 
+search , 
+tags , 

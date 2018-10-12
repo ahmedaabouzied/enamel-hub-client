@@ -4,7 +4,7 @@ import Feed from '@/components/Feed'
 import Login from '@/pages/Login';
 import Register from '@/pages/Register';
 import Home from '@/pages/Home';
-import Profile from '@/pages/MyProfile';
+import Profile from '@/pages/Profile';
 import NewCase from '@/pages/NewCase';
 import store from '@/store'
 Vue.use(Router)
@@ -40,7 +40,7 @@ const router = new Router({
       component: Login
     },
     {
-      path: '/profile',
+      path: '/profile/:id',
       name: 'profile',
       meta:{
         requireAuth : true,

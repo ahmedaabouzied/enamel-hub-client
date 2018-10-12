@@ -196,6 +196,7 @@ export default {
           let singUpObj = {
               first_name: this.signUpForm.firstName,
               last_name: this.signUpForm.lastName,
+              email:this.signUpForm.email,
               country: this.signUpForm.country,
               date_of_birth: this.date,
               gender: this.signUpForm.gender,
