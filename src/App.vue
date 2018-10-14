@@ -46,4 +46,9 @@ export default {
   .content{
     margin-top: 2%;
   }
+  @media (max-width: 600px) {
+    .content{
+      margin-top: 6%;
+    }
+  }
 </style>

@@ -7,6 +7,9 @@ export default {
     create(caseObj){
         return Api().post('cases/create',caseObj);
     },
+    showCase(id){
+        return Api().get('cases/show/'+id);
+    },
     star(id){
         return Api().post('/cases/star/create/'+id);
     },

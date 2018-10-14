@@ -31,7 +31,9 @@
                     :stars_count = "post.stars.length"
                     :stars = "post.stars"
                     :isMine = "isMine"
-                ></case-card>
+                    :showDetails = 'true'
+                >
+                </case-card>
             </v-flex>
         </v-layout>
     </v-container>

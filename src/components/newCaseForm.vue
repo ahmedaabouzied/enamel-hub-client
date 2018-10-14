@@ -3,7 +3,7 @@
         <v-layout row>
             <v-flex xs12>
                 <v-card>
-                    <v-card-title><h1>New Case</h1></v-card-title>
+                    <v-card-title><h2>New Case</h2></v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
                         <form @submit.prevent="submitCase">
@@ -56,7 +56,7 @@
                                     background-color="#e6ecf0"
                                     :rules="validateEmptyRule"
                                     class="input-field"
-                                    label="Diagnosis"
+                                    label="Symptoms"
                                     v-model="caseForm.symptoms"
                                     ></v-textarea>
                                     <v-textarea
@@ -157,6 +157,7 @@ export default {
                 age:'',
                 gender:'',
                 symptoms:'',
+                diagnosis:'',
                 treatment:'',
                 details:'',
             }
@@ -231,9 +232,9 @@ export default {
         widows: 100%;
         object-fit: cover;
     }
-    h1{
+    h2{
         font-weight: 200;
-        font-size: 2em;
-        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8em;
+        font-family: 'Roboto', sans-serif;
     }
 </style>

@@ -4,7 +4,9 @@
             <a flat icon @click="starCase" v-if="!starred"><v-icon small :color="color">star</v-icon> {{starsCount}}</a> 
             <a flat icon @click="unStarCase" v-if="starred"><v-icon small :color="color">star</v-icon> {{starsCount}}</a> 
         </v-flex> 
-        <v-spacer></v-spacer>
+        <v-flex xs5 offset-xs5 md2 offset-md8>
+            <slot name="details"></slot>
+        </v-flex>
     </v-layout>
 </template>
 
@@ -72,5 +74,13 @@ export default {
         text-decoration: none;
         color:rgba(0, 0, 0, 0.54);
     }
-
+    .details{
+        color: rgba(0, 0, 0, 0.54);
+    }
+    .details:hover{
+        color: #2196F3;
+    }
+    .details:focus{
+        color: #2196F3;
+    }
 </style>

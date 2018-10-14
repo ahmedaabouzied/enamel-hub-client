@@ -24,7 +24,7 @@ build the new case , // done //
 case star,  // done //
 unstar case,  // done //
 list all cases of user , // done//
-edit profile ,
+edit profile , 
 edit case, 
 delete case , 
 follow user , 

@@ -35,13 +35,18 @@
                                 </div>
                             </v-flex>
                         </v-layout>
+                        <slot name="caseDetails"></slot>
                         <v-divider></v-divider>
                         <case-actions
                         :stars_count="stars_count"
                         :case_id = "case_id"
                         :stars = "stars"
                         :isMine = "isMine"
-                        ></case-actions>
+                        >
+                            <template v-if="showDetails" slot="details">
+                                <a class="details" :href="'/case/'+case_id">Show Details >></a>
+                            </template>
+                        </case-actions>
                     </v-container>
                 </v-card>
             </v-flex>
@@ -52,7 +57,7 @@
 <script>
 import caseActions from '@/components/caseActions'
 export default {
-    props:['user_id','isMine','user_profile_image','user_first_name','user_last_name','case_image','case_age','case_gender','case_diagnosis','stars_count','case_id','stars'],
+    props:['showDetails','user_id','isMine','user_profile_image','user_first_name','user_last_name','case_image','case_age','case_gender','case_diagnosis','stars_count','case_id','stars'],
     components:{
         'case-actions':caseActions,
     }
@@ -74,7 +79,7 @@ export default {
         font-size: 1em;
         text-align: center;
         font-weight: 200;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Roboto', sans-serif;
     }
     .case_image{
         object-fit: cover;
@@ -85,14 +90,14 @@ export default {
         .personal{
             font-size: 1em;
             font-weight: 200;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Roboto', sans-serif;
             text-align: left;
             padding:2%;
         }
         p{
             font-size: 1em;
             font-weight: 200;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Roboto', sans-serif;
             text-align: left;
             padding:2%;
         }

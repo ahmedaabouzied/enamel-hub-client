@@ -6,6 +6,8 @@ import Register from '@/pages/Register';
 import Home from '@/pages/Home';
 import Profile from '@/pages/Profile';
 import NewCase from '@/pages/NewCase';
+import EditProfile from '@/pages/EditProfile';
+import Case from '@/pages/Case';
 import store from '@/store'
 Vue.use(Router)
 
@@ -48,6 +50,15 @@ const router = new Router({
       },
       component: Profile
     },
+    {
+      path: '/case/:id',
+      name: 'case',
+      meta:{
+        requireAuth : true,
+        title : 'Case'
+      },
+      component: Case
+    },
     // {
     //   path: '/search',
     //   name: 'search',
@@ -84,15 +95,15 @@ const router = new Router({
       },
       component: NewCase
     },
-    // {
-    //   path: '/profiles/:id',
-    //   name: 'profile',
-    //   meta:{
-    //     requireAuth : false,
-    //     title : 'Profile'
-    //   },
-    //   component: Profile
-    // }
+    {
+      path: '/editprofile/:id',
+      name: 'editProfile',
+      meta:{
+        requireAuth: true,
+        title : "Edit Profile"
+      },
+      component: EditProfile
+    }
   ],
 })
 router.beforeEach((to, from, next) => {
