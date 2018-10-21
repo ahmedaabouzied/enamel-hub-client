@@ -107,9 +107,10 @@
                                             :selected="data.selected"
                                             close
                                             color="primary"
+                                            text-color="white"
                                             @input="remove(data.item)"
                                         >
-                                            <strong>{{ data.item.title }}</strong>&nbsp;
+                                            <strong> # {{ data.item.title }}</strong>&nbsp;
                                         </v-chip>
                                         </template>
                                     </v-combobox>

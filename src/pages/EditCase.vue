@@ -14,6 +14,7 @@
                 <edit-case-form
                 v-if="casePost"
                 :case_post = "casePost"
+                :case_tags = "caseTags"
                 >
                 </edit-case-form>
             </v-flex>
@@ -28,6 +29,7 @@ export default {
         return{
             casePost:null,
             user:null,
+            caseTags:null,
             currentUser:JSON.parse(this.$store.getters.user),
             ErrMessage :'',
             Err : false,
@@ -43,6 +45,7 @@ export default {
                 console.log(res.data)
                 this.casePost = res.data.case;
                 this.user = res.data.user;
+                this.caseTags = res.data.tags;
             })
             .then((res)=>{
                 if (this.currentUser.id != this.user.id){
