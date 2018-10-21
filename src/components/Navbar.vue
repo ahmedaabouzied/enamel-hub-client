@@ -14,7 +14,7 @@
         <v-btn flat dark icon class="hidden-md-and-up"><v-icon>menu</v-icon></v-btn>
         <v-spacer class="hidden-sm-and-down"></v-spacer>
         <v-btn flat dark class="hidden-sm-and-down"><router-link to="/newcase"><h3 style="color:white;">NEW CASE</h3></router-link></v-btn>
-        <v-btn flat dark class="hidden-sm-and-down"><router-link :to="/profile/+user.id"><h3 style="color:white;">{{user.first_name}} {{user.last_name}}</h3></router-link></v-btn>
+        <v-btn flat dark class="hidden-sm-and-down"><router-link :to="/profile/+user.id"><h3 style="color:white;">{{profile.first_name}} {{profile.last_name}}</h3></router-link></v-btn>
         <v-menu offset-y>
         <v-btn flat dark icon slot="activator" ><v-icon>more_horiz</v-icon></v-btn>
         <v-list>
@@ -31,7 +31,8 @@
 export default {
     data(){
         return {
-            user:JSON.parse(this.$store.getters.profile)
+            profile:JSON.parse(this.$store.getters.profile),
+            user:JSON.parse(this.$store.getters.user),
 
         }
     },

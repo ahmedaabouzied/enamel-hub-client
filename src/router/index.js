@@ -8,6 +8,7 @@ import Profile from '@/pages/Profile';
 import NewCase from '@/pages/NewCase';
 import EditProfile from '@/pages/EditProfile';
 import Case from '@/pages/Case';
+import EditCase from '@/pages/EditCase';
 import store from '@/store'
 Vue.use(Router)
 
@@ -94,6 +95,15 @@ const router = new Router({
         title : 'New'
       },
       component: NewCase
+    },
+    {
+      path: '/editcase/:id',
+      name: 'editcase',
+      meta:{
+        requireAuth : true,
+        title : 'Edit Case'
+      },
+      component: EditCase
     },
     {
       path: '/editprofile/:id',

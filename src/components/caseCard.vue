@@ -16,7 +16,7 @@
                                     </a>
                                 </v-flex>
                                 <v-flex xs1 offset-xs2 offset-md7 md1 v-if="isMine">
-                                    <v-btn icon flat color="primary">
+                                    <v-btn icon flat color="primary" @click="editCase">
                                         <v-icon small >edit</v-icon>
                                     </v-btn>
                                 </v-flex>  
@@ -30,12 +30,13 @@
                         <v-layout row>
                             <v-flex xs12>
                                 <div class="case_details">
-                                    <span class="personal"><v-icon>turned_in</v-icon> {{case_age}} years old {{case_gender}}</span>
-                                    <p>{{case_diagnosis}}</p>
+                                    <p><b>{{case_title}}</b></p>
+                                    <v-chip label color="primary" text-color="white" v-for="tag in tags" :key="tag.id">
+                                        <b># {{tag.title}}</b>
+                                    </v-chip>
                                 </div>
                             </v-flex>
                         </v-layout>
-                        <slot name="caseDetails"></slot>
                         <v-divider></v-divider>
                         <case-actions
                         :stars_count="stars_count"
@@ -57,9 +58,14 @@
 <script>
 import caseActions from '@/components/caseActions'
 export default {
-    props:['showDetails','user_id','isMine','user_profile_image','user_first_name','user_last_name','case_image','case_age','case_gender','case_diagnosis','stars_count','case_id','stars'],
+    props:['showDetails','user_id','isMine','user_profile_image','user_first_name','user_last_name','case_image','case_age','case_gender','case_title','stars_count','case_id','stars','tags'],
     components:{
         'case-actions':caseActions,
+    },
+    methods:{
+        editCase: function(){
+            this.$router.push('/editcase/'+this.case_id)
+        }
     }
 }
 </script>

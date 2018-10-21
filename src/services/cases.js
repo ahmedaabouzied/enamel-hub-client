@@ -15,5 +15,11 @@ export default {
     },
     unStar(id){
         return Api().post('/cases/star/remove/'+id);
+    },
+    delete(id){
+        return Api().delete('cases/delete/'+id);
+    },
+    editCase(obj,id){
+        return Api().put('cases/edit/'+id,obj)
     }
 }

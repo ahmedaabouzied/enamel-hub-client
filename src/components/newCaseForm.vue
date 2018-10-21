@@ -9,7 +9,7 @@
                         <form @submit.prevent="submitCase">
                             <v-layout row>
                                 <v-flex xs12>
-                                    <img :src="caseImage" id="caseImagePreview">
+                                    <img :src="caseImage" id="caseImagePreview" width="100%">
                                 </v-flex>
                             </v-layout>
                             <v-layout row>
@@ -90,6 +90,33 @@
                             </v-layout>
                             <v-layout row>
                                 <v-flex xs12>
+                                    <v-combobox
+                                        v-model="caseForm.tags"
+                                        :items="tags"
+                                        label="Case Tags"
+                                        chips
+                                        clearable
+                                        item-text="title"
+                                        item-value="id"
+                                        solo
+                                        background-color="#e6ecf0"
+                                        multiple
+                                    >
+                                        <template slot="selection" slot-scope="data">
+                                        <v-chip
+                                            :selected="data.selected"
+                                            close
+                                            color="primary"
+                                            @input="remove(data.item)"
+                                        >
+                                            <strong>{{ data.item.title }}</strong>&nbsp;
+                                        </v-chip>
+                                        </template>
+                                    </v-combobox>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout row>
+                                <v-flex xs12>
                                     <v-btn type="submit">Submit</v-btn>
                                 </v-flex>
                             </v-layout>
@@ -135,106 +162,135 @@
 </template>
 
 <script>
-import firebase from 'firebase';
-import cases from '@/services/cases';
+import firebase from "firebase";
+import cases from "@/services/cases";
+import tags from "@/services/tags";
 export default {
-    data(){
-        return{
-            caseImage:null,
-            caseImageFile: null,
-            snackbar: false,
-            snackText: '',
-            alert:false,
-            loading: false,
-            alertText:'',
-            user:JSON.parse(this.$store.getters.user),
-            genders:['male','female'],
-            validateEmptyRule :[
-                v => !!v || "This field can't be empty"
-            ],
-            caseForm:{
-                title:'',
-                age:'',
-                gender:'',
-                symptoms:'',
-                diagnosis:'',
-                treatment:'',
-                details:'',
-            }
-        }
+  data() {
+    return {
+      caseImage: null,
+      caseImageFile: null,
+      snackbar: false,
+      snackText: "",
+      alert: false,
+      loading: false,
+      alertText: "",
+      user: JSON.parse(this.$store.getters.user),
+      genders: ["male", "female"],
+      tags: [],
+      validateEmptyRule: [v => !!v || "This field can't be empty"],
+      caseForm: {
+        title: "",
+        age: "",
+        tags:[],
+        gender: "",
+        symptoms: "",
+        diagnosis: "",
+        treatment: "",
+        details: ""
+      }
+    };
+  },
+  computed: {},
+  methods: {
+    remove (item) {
+        this.caseForm.tags.splice(this.caseForm.tags.indexOf(item), 1)
+        this.caseForm.tags = [...this.caseForm.tags]
     },
-    methods:{
-        openFilePicker(){
-            this.$refs.caseImage.click()
-        },
-        onFileChange(event){
-            let files = event.target.files;
-            let reader = new FileReader();
-            reader.readAsDataURL(files[0]);
-            this.caseImageFile = files[0];
-            reader.addEventListener('load',()=>{
-                this.loading = false;
-                let dataUrl = reader.result;
-                this.caseImage = dataUrl;
-            })
-        },
-        submitCase(event){ 
-            event.preventDefault()
-            let errors = [];
-            let caseObj = {
-                title : this.caseForm.title,
-                age: this.caseForm.age,
-                gender: this.caseForm.gender,
-                symptoms: this.caseForm.symptoms,
-                treatment: this.caseForm.treatment,
-                details: this.caseForm.details,
-            }
-            if(this.caseImage == null){
-                this.alertText = "You must add an image !"
-                this.alert = true;
-            }
-            for (var key in caseObj){
-                if(caseObj[key] == ''){
-                    errors.push(key);
-                    this.alertText = `You must specify ${key} `;
-                    this.alert = true
-                }
-            }
-            if(errors.length == 0){
-                this.alert = false;
-                var uploadTask = firebase.storage().ref('/cases/'+this.user.email+'/'+this.caseForm.title+'/'+new Date().getTime() +'_'+ this.caseImageFile.name).put(this.caseImageFile)
-                uploadTask.on('state_changed',()=>{
-                    this.loading = true;
-                })
-                uploadTask.then(()=>{
-                    this.loading = false;
-                    uploadTask.snapshot.ref.getDownloadURL().then((downloadURL)=> {
-                        let caseImageUrl = downloadURL;
-                        caseObj.image_url = caseImageUrl;
-                        cases.create(caseObj)
-                        .then((res)=>{
-                            console.log(res.data);
-                            this.snackText = res.data.message;
-                            this.snackbar = true;
-                        })
-                    });
-                })
-            }
-            
+    getTags() {
+      tags.getTags().then(res => {
+        let resArr = res.data;
+        this.tags = resArr;
+      });
+    },
+    openFilePicker() {
+      this.$refs.caseImage.click();
+    },
+    onFileChange(event) {
+      let files = event.target.files;
+      let reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      this.caseImageFile = files[0];
+      reader.addEventListener("load", () => {
+        this.loading = false;
+        let dataUrl = reader.result;
+        this.caseImage = dataUrl;
+      });
+    },
+    submitCase(event) {
+      event.preventDefault();
+      let chosenTags = this.caseForm.tags;
+      chosenTags = chosenTags.map(x=>x.id);
+      let errors = [];
+      let caseObj = {
+        title: this.caseForm.title,
+        age: this.caseForm.age,
+        gender: this.caseForm.gender,
+        symptoms: this.caseForm.symptoms,
+        diagnosis: this.caseForm.diagnosis,
+        treatment: this.caseForm.treatment,
+        tags:chosenTags,
+        details: this.caseForm.details
+      };
+      if (this.caseImage == null) {
+        this.alertText = "You must add an image !";
+        this.alert = true;
+      }
+      for (var key in caseObj) {
+        if (caseObj[key] == "") {
+          errors.push(key);
+          this.alertText = `You must specify ${key} `;
+          this.alert = true;
         }
+      }
+      if (errors.length == 0) {
+        this.alert = false;
+        var uploadTask = firebase
+          .storage()
+          .ref(
+            "/cases/" +
+              this.user.email +
+              "/" +
+              this.caseForm.title +
+              "/" +
+              new Date().getTime() +
+              "_" +
+              this.caseImageFile.name
+          )
+          .put(this.caseImageFile);
+        uploadTask.on("state_changed", () => {
+          this.loading = true;
+        });
+        uploadTask.then(() => {
+          this.loading = false;
+          uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+            let caseImageUrl = downloadURL;
+            caseObj.image_url = caseImageUrl;
+            cases.create(caseObj).then(res => {
+              console.log(res.data);
+              this.snackText = res.data.message;
+              this.snackbar = true;
+            });
+          });
+        });
+      }
     }
-}
+  },
+  created() {
+    this.getTags();
+  }
+};
 </script>
 
 <style lang="scss">
-    #caseImagePreview{
-        max-height: 250px;
-        widows: 100%;
-        object-fit: cover;
-    }
-    h2{
-        font-weight: 200;
-        font-size: 1.8em;
-        font-family: 'Roboto', sans-serif;
-    }
+#caseImagePreview {
+  max-height: 250px;
+  widows: 100%;
+  object-fit: cover;
+}
+h2 {
+  font-weight: 200;
+  font-size: 1.8em;
+  font-family: "Roboto", sans-serif;
+}
 </style>
