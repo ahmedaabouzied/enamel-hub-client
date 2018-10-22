@@ -27,9 +27,9 @@ list all cases of user , // done//
 edit profile ,  // done //
 edit case,  // done //
 delete case ,  // done //
-tags , // //
-follow user , 
-unfollow user , 
+tags , //done //
+follow user ,  // done //
+unfollow user ,  // done //
 feed , 
 search , 
 tags , 

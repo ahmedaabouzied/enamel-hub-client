@@ -2,6 +2,17 @@
   <v-app>
     <app-navbar class="fixed-down" v-if="isLoggedIn"></app-navbar>
     <v-content class="content">
+      <v-btn
+        color="primary"
+        dark
+        class="floating_button"
+        bottom
+        right
+        fab
+        @click="newCase"
+      >
+        <v-icon>add</v-icon>
+      </v-btn>
       <router-view/>
     </v-content>
   </v-app>
@@ -30,6 +41,11 @@ export default {
     Navbar,
     'app-navbar':Navbar
   },
+  methods:{
+    newCase(){
+      this.$router.push('/newcase')
+    }
+  },
   computed:{
     year:function(){
       let date = new Date();
@@ -45,6 +61,11 @@ export default {
 <style lang="scss">
   .content{
     margin-top: 2%;
+  }
+  .floating_button{
+    position: fixed !important;
+    margin-bottom: 50px;
+    z-index: 1;
   }
   @media (max-width: 600px) {
     .content{

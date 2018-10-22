@@ -10,9 +10,7 @@
                 </user-card>
             </v-flex>
             <v-flex md4 class="hidden-sm-and-down">
-               
             </v-flex>
-
         </v-layout>
         <v-layout row>
             <v-flex xs12 md8>

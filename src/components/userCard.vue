@@ -23,6 +23,15 @@
                             <h4><b>80</b> Followings</h4>
                         </v-flex>
                     </v-layout>
+                    <v-layout row>
+                        <v-flex xs12>
+                            <follow-button
+                            v-if="!isMine"
+                            :user="user"
+                            :profile="profile"
+                            ></follow-button>
+                        </v-flex>
+                    </v-layout>
                     <v-divider></v-divider>
                     <v-layout row class="profile_buttons">
                         <v-flex class="text-xs-center mt-3" xs12>
@@ -44,12 +53,16 @@
 </template>
 
 <script>
+import followButton from '@/components/followButton';
 export default {
     props:['user','profile','isMine'],
     methods:{
         goToEdit:function(){
             this.$router.push('/editprofile/'+this.user.id)
         }
+    },
+    components:{
+        'follow-button':followButton
     }
 }
 </script>
