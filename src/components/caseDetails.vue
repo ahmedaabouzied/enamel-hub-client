@@ -21,7 +21,7 @@
                                     </a>
                                 </v-flex>
                                 <v-flex xs1>
-                                    <a href="#delete" class="btn" @click="check = true">
+                                    <a href="#delete" class="btn" v-if="isMine" @click="check = true">
                                         <v-icon small color="primary">delete</v-icon>
                                     </a>
                                 </v-flex>  
@@ -87,6 +87,11 @@
 import caseActions from '@/components/caseActions'
 import cases from '@/services/cases'
 export default {
+    data(){
+        return{
+
+        }
+    },
     props:['showDetails','user_id','isMine','user_profile_image','user_first_name','user_last_name','case_post','tags','stars','stars_count'],
     components:{
         'case-actions':caseActions,

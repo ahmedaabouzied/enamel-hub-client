@@ -64,7 +64,7 @@ export default {
   }
   .floating_button{
     position: fixed !important;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     z-index: 1;
   }
   @media (max-width: 600px) {

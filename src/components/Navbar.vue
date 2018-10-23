@@ -60,7 +60,6 @@ export default {
     color:white;
     font-size: 1.2em;
     padding-left: 5px;
-    padding-bottom: 5px;
     text-transform: capitalize;
 }
 .fixed-down{
